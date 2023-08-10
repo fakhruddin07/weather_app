@@ -9,20 +9,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String? main;
-  String? description;
-  String? temp;
-  String? feelsLike;
-  String? pressure;
-  String? humidity;
-  String? windSpeed;
-  String? sunrise;
-  String? sunset;
+  late String main;
+  late String description;
+  late String temp;
+  late String feelsLike;
+  late String pressure;
+  late String humidity;
+  late String windSpeed;
+  late String sunrise;
+  late String sunset;
 
   Future<void> navigateToHome() async {
     WeatherData data = WeatherData(location: "Comilla");
     await data.getWeatherData();
+    main = data.main;
+    description = data.description;
     temp = data.temp;
+    feelsLike =data.feelsLike;
+    pressure = data.pressure;
+    humidity = data.humidity;
+    windSpeed = data.windSpeed;
+    sunrise = data.sunrise;
+    sunset = data.sunset;
     Future.delayed(
       const Duration(seconds: 3),
     ).then((value) {

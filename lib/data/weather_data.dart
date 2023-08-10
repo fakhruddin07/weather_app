@@ -20,7 +20,7 @@ class WeatherData {
   Future<void> getWeatherData() async {
     try {
       Uri url = Uri.parse(
-          "https://api.openweathermap.org/data/2.5/weather?q=$location&appid=f807d5cd9805a3bf5e96334b30da6c88");
+          "https://api.openweathermap.org/data/2.5/weather?q=$location&appid=f807d5cd9805a3bf5e96334b30da6c88&units=metric");
       Response response = await get(url);
       final decodedResponse = jsonDecode(response.body);
 
@@ -33,12 +33,12 @@ class WeatherData {
       Map<String, dynamic> mainData = decodedResponse["main"];
       temp = mainData["temp"].toString();
       feelsLike = mainData["feels_like"].toString();
-      feelsLike = mainData["pressure"].toString();
+      pressure = mainData["pressure"].toString();
       humidity = mainData["humidity"].toString();
 
       //Getting wind speed
       Map<String, dynamic> airSpeedInfo = decodedResponse["wind"];
-      windSpeed = airSpeedInfo["speed"].toString();
+      windSpeed = (airSpeedInfo["speed"] * 3.6).toString();
 
       //Getting sunrise, sunset
       Map<String, dynamic> sysDataInfo = decodedResponse["sys"];
