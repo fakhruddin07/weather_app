@@ -9,21 +9,45 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  navigateToHome() {
-    Future.delayed(const Duration(seconds: 5),).then((value) {
-      Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
-    });
-  }
-  
-  Future<void> startApp() async{
+  String? main;
+  String? description;
+  String? temp;
+  String? feelsLike;
+  String? pressure;
+  String? humidity;
+  String? windSpeed;
+  String? sunrise;
+  String? sunset;
+
+  Future<void> navigateToHome() async {
     WeatherData data = WeatherData(location: "Comilla");
     await data.getWeatherData();
+    temp = data.temp;
+    Future.delayed(
+      const Duration(seconds: 3),
+    ).then((value) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        "/home",
+        (route) => false,
+        arguments: {
+          "weather-main": main,
+          "weather-description": description,
+          "temperature": temp,
+          "feels-Like": feelsLike,
+          "pressure": pressure,
+          "humidity": humidity,
+          "windSpeed": windSpeed,
+          "sunrise": sunrise,
+          "sunset": sunset,
+        },
+      );
+    });
   }
 
   @override
   void initState() {
     navigateToHome();
-    startApp();
     super.initState();
   }
 

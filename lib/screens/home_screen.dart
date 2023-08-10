@@ -8,10 +8,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(child: Text("Home Screen"),),
+    Map info = ModalRoute.of(context)?.settings.arguments as Map ;
+    return Scaffold(
+      body: SafeArea(child: Center(child: Text(info["temperature"])),),
     );
   }
 }

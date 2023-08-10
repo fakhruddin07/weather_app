@@ -1,20 +1,19 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
 class WeatherData {
   final String location;
-  String? main;
-  String? description;
-  String? temp;
-  String? feelsLike;
-  String? pressure;
-  String? humidity;
-  String? windSpeed;
-  String? sunrise;
-  String? sunset;
+  late String main;
+  late String description;
+  late String temp;
+  late String feelsLike;
+  late String pressure;
+  late String humidity;
+  late String windSpeed;
+  late String sunrise;
+  late String sunset;
 
   WeatherData({required this.location});
 
