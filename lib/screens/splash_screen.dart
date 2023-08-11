@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_app/data/weather_data.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     main = data.main;
     description = data.description;
     temp = data.temp;
-    feelsLike =data.feelsLike;
+    feelsLike = data.feelsLike;
     pressure = data.pressure;
     humidity = data.humidity;
     windSpeed = data.windSpeed;
@@ -61,10 +62,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Text("Splash Screen"),
+    return Scaffold(
+      backgroundColor: Colors.blue.shade200,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/images/logo.png", width: 240),
+            Text("Weather app", style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 10),
+            Text("Made by Fakhruddin Noman",
+                style: Theme.of(context).textTheme.titleMedium),
+            const SizedBox(height: 30),
+            const SpinKitWave(
+              color: Colors.white,
+              size: 50.0,
+            )
+          ],
         ),
       ),
     );
