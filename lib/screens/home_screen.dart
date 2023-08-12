@@ -21,15 +21,32 @@ class _HomeScreenState extends State<HomeScreen> {
     var city = _cityName[_random.nextInt(_cityName.length)];
     Map info = ModalRoute.of(context)?.settings.arguments as Map;
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: Colors.white,
+        ),
+      ),
       backgroundColor: Colors.grey.shade400,
       body: SafeArea(
-        child: SizedBox(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.blue.shade800,
+                Colors.blue.shade300,
+              ],
+            ),
+          ),
           child: Column(
             children: [
               Container(
                 padding: const EdgeInsets.all(8),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                // margin:
+                //     const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(30)),
@@ -54,6 +71,67 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text("1st CONTAINER"),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text("2nd CONTAINER"),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      height: 200,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text("data"),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      height: 200,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text("data"),
+                    ),
+                  ),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text("Data Provided By Openweathermap.org"),
               ),
             ],
           ),

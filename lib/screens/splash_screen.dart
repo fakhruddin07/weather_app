@@ -34,8 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     sunset = data.sunset;
     Future.delayed(
       const Duration(seconds: 3),
-    ).then((value) {
-      Navigator.pushNamedAndRemoveUntil(
+      () => Navigator.pushNamedAndRemoveUntil(
         context,
         "/home",
         (route) => false,
@@ -50,8 +49,8 @@ class _SplashScreenState extends State<SplashScreen> {
           "sunrise": sunrise,
           "sunset": sunset,
         },
-      );
-    });
+      ),
+    );
   }
 
   @override
