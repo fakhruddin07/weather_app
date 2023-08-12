@@ -20,6 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
   late String tempMax;
   late String pressure;
   late String humidity;
+  late String seaLevel;
+  late String groundLevel;
   late String windSpeed;
   late String sunrise;
   late String sunset;
@@ -36,9 +38,9 @@ class _SplashScreenState extends State<SplashScreen> {
     tempMax = data.tempMax;
     pressure = data.pressure;
     humidity = data.humidity;
+    seaLevel = data.seaLevel;
+    groundLevel = data.groundLevel;
     windSpeed = data.windSpeed;
-    sunrise = data.sunrise;
-    sunset = data.sunset;
     Future.delayed(
       const Duration(seconds: 3),
       () => Navigator.pushNamedAndRemoveUntil(
@@ -54,9 +56,9 @@ class _SplashScreenState extends State<SplashScreen> {
           "temp_max": tempMax,
           "pressure": pressure,
           "humidity": humidity,
+          "sea_level": seaLevel,
+          "grnd_level": groundLevel,
           "windSpeed": windSpeed,
-          "sunrise": sunrise,
-          "sunset": sunset,
         },
       ),
     );

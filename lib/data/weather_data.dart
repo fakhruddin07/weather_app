@@ -13,9 +13,9 @@ class WeatherData {
   late String tempMax;
   late String pressure;
   late String humidity;
+  late String seaLevel;
+  late String groundLevel;
   late String windSpeed;
-  late String sunrise;
-  late String sunset;
 
   WeatherData({required this.location});
 
@@ -33,21 +33,21 @@ class WeatherData {
 
       //Getting temp, feels like, pressure, humidity
       Map<String, dynamic> mainData = decodedResponse["main"];
+      double getFeelsLike = mainData["feels_like"];
       temp = mainData["temp"].toString();
-      feelsLike = mainData["feels_like"].toString();
+      feelsLike = getFeelsLike.toStringAsFixed(0);
       tempMin = mainData["temp_min"].toString();
       tempMax = mainData["temp_max"].toString();
       pressure = mainData["pressure"].toString();
       humidity = mainData["humidity"].toString();
+      seaLevel = mainData["sea_level"].toString();
+      groundLevel = mainData["grnd_level"].toString();
 
       //Getting wind speed
       Map<String, dynamic> airSpeedInfo = decodedResponse["wind"];
-      windSpeed = (airSpeedInfo["speed"] * 3.6).toString();
+      double getWindSpeed = (airSpeedInfo["speed"] / 0.27777777777778);
+      windSpeed = getWindSpeed.toStringAsFixed(2);
 
-      //Getting sunrise, sunset
-      Map<String, dynamic> sysDataInfo = decodedResponse["sys"];
-      sunrise = sysDataInfo["sunrise"].toString();
-      sunset = sysDataInfo["sunset"].toString();
     }catch(e){
       main = "Can't find data";
       description = "Can't find data";
@@ -57,8 +57,6 @@ class WeatherData {
       tempMax = "Can't find data";
       humidity = "Can't find data";
       windSpeed = "Can't find data";
-      sunrise = "Can't find data";
-      sunset = "Can't find data";
       log(e.toString());
     }
   }
