@@ -9,6 +9,8 @@ class WeatherData {
   late String description;
   late String temp;
   late String feelsLike;
+  late String tempMin;
+  late String tempMax;
   late String pressure;
   late String humidity;
   late String windSpeed;
@@ -33,6 +35,8 @@ class WeatherData {
       Map<String, dynamic> mainData = decodedResponse["main"];
       temp = mainData["temp"].toString();
       feelsLike = mainData["feels_like"].toString();
+      tempMin = mainData["temp_min"].toString();
+      tempMax = mainData["temp_max"].toString();
       pressure = mainData["pressure"].toString();
       humidity = mainData["humidity"].toString();
 
@@ -49,7 +53,8 @@ class WeatherData {
       description = "Can't find data";
       temp = "Can't find data";
       feelsLike = "Can't find data";
-      feelsLike = "Can't find data";
+      tempMin = "Can't find data";
+      tempMax = "Can't find data";
       humidity = "Can't find data";
       windSpeed = "Can't find data";
       sunrise = "Can't find data";

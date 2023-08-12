@@ -82,7 +82,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text("1st CONTAINER"),
+                      child: Row(
+                        children: [
+                    Image.asset(
+                            "assets/images/logo.png",
+                            height: 50,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                info["weather-description"],
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              Text(
+                                city,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -96,7 +116,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text("2nd CONTAINER"),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(
+                        Icons.thermostat,
+                        size: 100,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("${info["temperature"]}",
+                              style: Theme.of(context).textTheme.displayLarge),
+                          Text("°C", style: Theme.of(context).textTheme.displaySmall),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            info["weather-main"],
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            "${info["temp_max"]}°/",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),Text(
+                            "${info["temp_min"]}°",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -146,6 +199,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(info["weather-description"]),
               Text("${info["temperature"]}°C"),
               Text("${info["feels-Like"]}°C"),
+              Text("${info["temp_min"]}°C"),
+              Text("${info["temp_max"]}°C"),
               Text("${info["pressure"]} mbar"),
               Text("${info["humidity"]}%"),
               Text("${info["windSpeed"]} km/h"),

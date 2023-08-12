@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_app/data/weather_data.dart';
@@ -14,6 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
   late String description;
   late String temp;
   late String feelsLike;
+  late String tempMin;
+  late String tempMax;
   late String pressure;
   late String humidity;
   late String windSpeed;
@@ -27,6 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
     description = data.description;
     temp = data.temp;
     feelsLike = data.feelsLike;
+    tempMin = data.tempMin;
+    log(tempMin = data.tempMin.toString());
+    tempMax = data.tempMax;
     pressure = data.pressure;
     humidity = data.humidity;
     windSpeed = data.windSpeed;
@@ -43,6 +50,8 @@ class _SplashScreenState extends State<SplashScreen> {
           "weather-description": description,
           "temperature": temp,
           "feels-Like": feelsLike,
+          "temp_min": tempMin,
+          "temp_max": tempMax,
           "pressure": pressure,
           "humidity": humidity,
           "windSpeed": windSpeed,
