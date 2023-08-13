@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_app/data/weather_data.dart';
@@ -12,8 +10,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late String city = "Comilla";
   late String main;
   late String description;
+  late String icon;
   late String temp;
   late String feelsLike;
   late String tempMin;
@@ -23,18 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
   late String seaLevel;
   late String groundLevel;
   late String windSpeed;
-  late String sunrise;
-  late String sunset;
 
   Future<void> navigateToHome() async {
-    WeatherData data = WeatherData(location: "Comilla");
+    WeatherData data = WeatherData(location: city);
     await data.getWeatherData();
     main = data.main;
     description = data.description;
+    icon = data.icon;
     temp = data.temp;
     feelsLike = data.feelsLike;
     tempMin = data.tempMin;
-    log(tempMin = data.tempMin.toString());
     tempMax = data.tempMax;
     pressure = data.pressure;
     humidity = data.humidity;
@@ -48,10 +46,12 @@ class _SplashScreenState extends State<SplashScreen> {
         "/home",
         (route) => false,
         arguments: {
-          "weather-main": main,
-          "weather-description": description,
+          "city_name": city,
+          "weather_main": main,
+          "weather_description": description,
+          "weather_icon": icon,
           "temperature": temp,
-          "feels-Like": feelsLike,
+          "feels_Like": feelsLike,
           "temp_min": tempMin,
           "temp_max": tempMax,
           "pressure": pressure,
@@ -66,12 +66,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    navigateToHome();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Map? searchInfo = ModalRoute.of(context)!.settings.arguments as Map?;
+    if(searchInfo?.isNotEmpty ?? false){
+      city = searchInfo?["search_name"];
+    }
+    navigateToHome();
     return Scaffold(
       backgroundColor: Colors.blue.shade200,
       body: Center(
@@ -81,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Image.asset("assets/images/logo.png", width: 240),
             Text("Weather app", style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 10),
-            Text("Made by Fakhruddin Noman",
+            Text("Made by Fakhruddin",
                 style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 30),
             const SpinKitWave(

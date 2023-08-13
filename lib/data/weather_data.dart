@@ -7,6 +7,7 @@ class WeatherData {
   final String location;
   late String main;
   late String description;
+  late String icon;
   late String temp;
   late String feelsLike;
   late String tempMin;
@@ -30,6 +31,7 @@ class WeatherData {
       Map<String, dynamic> weatherInfo = decodedResponse["weather"][0];
       main = weatherInfo["main"];
       description = weatherInfo["description"];
+      icon = weatherInfo["icon"];
 
       //Getting temp, feels like, pressure, humidity
       Map<String, dynamic> mainData = decodedResponse["main"];
@@ -49,14 +51,17 @@ class WeatherData {
       windSpeed = getWindSpeed.toStringAsFixed(2);
 
     }catch(e){
-      main = "Can't find data";
-      description = "Can't find data";
-      temp = "Can't find data";
-      feelsLike = "Can't find data";
-      tempMin = "Can't find data";
-      tempMax = "Can't find data";
-      humidity = "Can't find data";
-      windSpeed = "Can't find data";
+      main = "NA";
+      description = "NA";
+      icon = "09d";
+      temp = "NA";
+      feelsLike = "NA";
+      tempMin = "NA";
+      tempMax = "NA";
+      humidity = "NA";
+      seaLevel = "NA";
+      groundLevel = "NA";
+      windSpeed = "NA";
       log(e.toString());
     }
   }
