@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,11 +9,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchTEController = TextEditingController();
-  final List _cityName = ["Cumilla", "Dhaka", "Rajshahi"];
-  final _random = Random();
   @override
   Widget build(BuildContext context) {
-    // var city = _cityName[_random.nextInt(_cityName.length)];
     Map info = ModalRoute.of(context)?.settings.arguments as Map;
 
     return Scaffold(
@@ -27,19 +22,19 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: Colors.grey.shade400,
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Colors.blue.shade800,
-                Colors.blue.shade300,
-              ],
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.blue.shade800,
+                  Colors.blue.shade300,
+                ],
+              ),
             ),
-          ),
-          child: SingleChildScrollView(
             child: Column(
               children: [
                 Container(
@@ -86,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
@@ -116,11 +111,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text(
                                   info["weather_description"],
-                                  style: Theme.of(context).textTheme.titleMedium,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
                                 ),
                                 Text(
                                   "In ${info["city_name"]}",
-                                  style: Theme.of(context).textTheme.titleMedium,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
                                 ),
                               ],
                             ),
@@ -130,69 +127,80 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Icon(
-                            Icons.thermostat,
-                            size: 100,
-                          ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(30),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text("${info["temperature"]}",
-                                style: Theme.of(context).textTheme.displayLarge),
-                            Text("°C",
-                                style: Theme.of(context).textTheme.displaySmall),
+                            const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Icon(
+                                Icons.thermostat,
+                                size: 100,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("${info["temperature"]}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayLarge),
+                                Text("°C",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  info["weather_main"],
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  "${info["temp_max"]}°/",
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                                Text(
+                                  "${info["temp_min"]}°",
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            ElevatedButton.icon(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey.shade700),
+                              icon: const Icon(Icons.energy_savings_leaf,
+                                  color: Colors.white),
+                              label: const Text(
+                                "AQI",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              info["weather_main"],
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            const SizedBox(width: 10),
-                            Text(
-                              "${info["temp_max"]}°/",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            Text(
-                              "${info["temp_min"]}°",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton.icon(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey.shade700),
-                          icon: const Icon(Icons.energy_savings_leaf,
-                              color: Colors.white),
-                          label: const Text(
-                            "AQI",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
@@ -204,14 +212,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Column(
+                        child: Row(
                           children: [
-                            const Align(
-                                alignment: Alignment.topLeft,
-                                child: Icon(Icons.air, size: 70)),
-                            const SizedBox(height: 20),
-                            Text("${info["windSpeed"]} km/h",
-                                style: Theme.of(context).textTheme.titleLarge),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.air, size: 70),
+                                const SizedBox(height: 20),
+                                Text("${info["windSpeed"]} km/h",
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -270,10 +282,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text("Data Provided By Openweathermap.org"),
-                ),
+                const SizedBox(height: 20),
+                const Text("Data Provided By Openweathermap.org"),
               ],
             ),
           ),
